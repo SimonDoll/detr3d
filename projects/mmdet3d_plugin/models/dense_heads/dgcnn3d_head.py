@@ -11,7 +11,7 @@ from mmdet.models.utils.transformer import inverse_sigmoid
 from mmdet.models import HEADS
 from mmdet.models.dense_heads import DETRHead
 from mmdet3d.core.bbox.coders import build_bbox_coder
-from projects.mmdet3d_plugin.core.bbox.util import normalize_bbox
+from mmdet3d_plugin.core.bbox.util import normalize_bbox
 
 
 @HEADS.register_module()

@@ -1,13 +1,13 @@
-import torch 
-
-
+import torch
 def normalize_bbox(bboxes, pc_range):
 
+    # bboxes are mmdet_rc1.0 format: x y z l w h rot
     cx = bboxes[..., 0:1]
     cy = bboxes[..., 1:2]
     cz = bboxes[..., 2:3]
-    w = bboxes[..., 3:4].log()
-    l = bboxes[..., 4:5].log()
+    
+    l = bboxes[..., 3:4].log()
+    w = bboxes[..., 4:5].log()
     h = bboxes[..., 5:6].log()
 
     rot = bboxes[..., 6:7]
@@ -15,12 +15,10 @@ def normalize_bbox(bboxes, pc_range):
         vx = bboxes[..., 7:8] 
         vy = bboxes[..., 8:9]
         normalized_bboxes = torch.cat(
-            (cx, cy, w, l, cz, h, rot.sin(), rot.cos(), vx, vy), dim=-1
-        )
+            (cx, cy, cz, l, w, h, rot.sin(), rot.cos(), vx, vy), dim=-1)
     else:
         normalized_bboxes = torch.cat(
-            (cx, cy, w, l, cz, h, rot.sin(), rot.cos()), dim=-1
-        )
+             (cx, cy, cz, l, w, h, rot.sin(), rot.cos()), dim=-1)
     return normalized_bboxes
 
 def denormalize_bbox(normalized_bboxes, pc_range):
@@ -33,11 +31,11 @@ def denormalize_bbox(normalized_bboxes, pc_range):
     # center in the bev
     cx = normalized_bboxes[..., 0:1]
     cy = normalized_bboxes[..., 1:2]
-    cz = normalized_bboxes[..., 4:5]
+    cz = normalized_bboxes[..., 2:3]
 
     # size
-    w = normalized_bboxes[..., 2:3]
     l = normalized_bboxes[..., 3:4]
+    w = normalized_bboxes[..., 4:5]
     h = normalized_bboxes[..., 5:6]
 
     w = w.exp() 
@@ -47,7 +45,9 @@ def denormalize_bbox(normalized_bboxes, pc_range):
          # velocity 
         vx = normalized_bboxes[:, 8:9]
         vy = normalized_bboxes[:, 9:10]
-        denormalized_bboxes = torch.cat([cx, cy, cz, w, l, h, rot, vx, vy], dim=-1)
+        # mmdet3d rc1 format lwh instead of wlh
+        denormalized_bboxes = torch.cat([cx, cy, cz, l, w, h, rot, vx, vy], dim=-1)
     else:
-        denormalized_bboxes = torch.cat([cx, cy, cz, w, l, h, rot], dim=-1)
+        # mmdet3d rc1 format lwh instead of wlh
+        denormalized_bboxes = torch.cat([cx, cy, cz, l, w, h, rot], dim=-1)
     return denormalized_bboxes
