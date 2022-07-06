@@ -4,7 +4,7 @@ _base_ = [
 ]
 
 plugin=True
-plugin_dir='projects/mmdet3d_plugin/'
+plugin_dir='detr3d/'
 
 # If point cloud range is changed, the models should also change their point
 # cloud range accordingly
@@ -222,4 +222,4 @@ total_epochs = 24
 evaluation = dict(interval=2, pipeline=test_pipeline)
 
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
-load_from='ckpts/fcos3d.pth'
+load_from='pretrained/fcos3d.pth'

@@ -1,10 +1,10 @@
 _base_ = [
-    '../../../mmdetection3d/configs/_base_/datasets/nus-3d.py',
-    '../../../mmdetection3d/configs/_base_/default_runtime.py'
+    '../../mmdetection3d/configs/_base_/datasets/nus-3d.py',
+    '../../mmdetection3d/configs/_base_/default_runtime.py'
 ]
 
 plugin=True
-plugin_dir='projects/mmdet3d_plugin/'
+plugin_dir='detr3d/'
 
 # If point cloud range is changed, the models should also change their point
 # cloud range accordingly
