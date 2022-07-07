@@ -1,10 +1,10 @@
 _base_ = [
-    '../../../mmdetection3d/configs/_base_/datasets/nus-3d.py',
-    '../../../mmdetection3d/configs/_base_/default_runtime.py'
+    '../../../../mmdetection3d/configs/_base_/datasets/nus-3d.py',
+    '../../../../mmdetection3d/configs/_base_/default_runtime.py'
 ]
 
 plugin=True
-plugin_dir='projects/mmdet3d_plugin/'
+plugin_dir='mmdet3d_plugin/'
 
 # If point cloud range is changed, the models should also change their point
 # cloud range accordingly
@@ -222,4 +222,4 @@ total_epochs = 24
 evaluation = dict(interval=2, pipeline=test_pipeline)
 
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
-load_from='ckpts/fcos3d.pth'
+load_from='pretrained/fcos3d.pth'

@@ -1,5 +1,9 @@
 import torch
+
 def normalize_bbox(bboxes, pc_range):
+    """modified version to allow for the mmdet_rc1 cordinate speicifcation
+    CAUTION: This requires the bboxes boxes to be adapted as well: box:=[x,y,z,l,w,h, rot_sin, rot_cos, v_x, v_y]
+    """
 
     # bboxes are mmdet_rc1.0 format: x y z l w h rot
     cx = bboxes[..., 0:1]
@@ -22,6 +26,11 @@ def normalize_bbox(bboxes, pc_range):
     return normalized_bboxes
 
 def denormalize_bbox(normalized_bboxes, pc_range):
+    """modified version to allow for the mmdet_rc1 cordinate speicifcation
+    CAUTION: This requires the normalized boxes to be adapted as well: box:=[x,y,z,l,w,h, rot_sin, rot_cos, v_x, v_y]
+    """
+    
+
     # rotation 
     rot_sine = normalized_bboxes[..., 6:7]
 
