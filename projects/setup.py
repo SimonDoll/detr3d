@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='mmdet3d_plugin',
+    name='detr3d',
     version='',
     packages=find_packages(),
     install_requires=[''],

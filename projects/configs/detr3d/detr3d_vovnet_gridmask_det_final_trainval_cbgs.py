@@ -4,7 +4,7 @@ _base_ = [
 ]
 
 plugin=True
-plugin_dir='mmdet3d_plugin/'
+plugin_dir='detr3d/'
 
 # If point cloud range is changed, the models should also change their point
 # cloud range accordingly
