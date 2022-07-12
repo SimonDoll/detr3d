@@ -10,6 +10,6 @@ This results in the following adaptions:
 - Packages detr3d to a pip-package
 
 ### Usage
-- To use this fork: setup DETR3D as described in the original [README](https://github.com/WangYueFt/detr3d/blob/main/README.md).
-- Install the DETR3D package by running `pip install -e projects/` in the repository root folder
+- To use this fork: setup all dependencies of DETR3D as described in the original [README](https://github.com/WangYueFt/detr3d/blob/main/README.md).
+- Install the DETR3D package by running `pip install -e .` in the repository root folder
 
